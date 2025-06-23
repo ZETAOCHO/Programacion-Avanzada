@@ -43,3 +43,5 @@ ax.scatter(x=[1, 2, 3], y=[3, 2, 1])
 plt.savefig("Diagrama de dispersión.png")
 #Por ultimo se muestra el grafico
 plt.show()
+
+#Como realizarlas demas graficas
