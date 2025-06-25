@@ -101,3 +101,8 @@ plt.violinplot([datos, np.random.randn(100)])  # Dibuja un diagrama de violín p
 plt.title("Gráfica de violines")  # Título
 plt.savefig("violines.png")  # Guarda la imagen
 plt.show()  # Muestra la gráfica
+
+
+#Que es la poo, que es una clase, que es un objeto; diferencias, metodo,atributo, encapsulamiento, 
+# herencia, polimorfismo, abstracción, ejemplos y ejercicios de tarea para el alumno 
+# Fecha de entrega Miercoles 9
