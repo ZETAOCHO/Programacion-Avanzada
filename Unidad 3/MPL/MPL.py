@@ -105,4 +105,4 @@ plt.show()  # Muestra la gráfica
 
 #Que es la poo, que es una clase, que es un objeto; diferencias, metodo,atributo, encapsulamiento, 
 # herencia, polimorfismo, abstracción, ejemplos y ejercicios de tarea para el alumno 
-# Fecha de entrega Miercoles 9
+# Fecha de entrega Miercoles 9 de julio del 2025
