@@ -7,4 +7,17 @@
 #En el siguiente codigo e crea una ventanacon un boton, cuyo texto esta representado por 
 #el parametro text(IMEC91M)
 
-import TKinter as tk
+import tkinter as tk
+from tkinter import ttk
+
+root = tk.Tk()
+root.config(width=300, height=200)
+root.title("Boton en TK")
+root.config(bg="lightblue")
+root.config(cursor="no")  # Cambia el cursor a "no disponible")
+boton = ttk.Button(text="¡Mecatronica, IMEC91M!")
+boton.place(x=50, y=50)
+root.mainloop()
+
+#Tarea:
+#Hacer una calculadora basica
