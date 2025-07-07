@@ -1,14 +1,24 @@
 import cv2
 import numpy as np
 
-# Cargar una imagen y mostrarla en una ventana
-width = 640
-height = 480
-imagen = cv2.imread("C:\\Users\\vagoa\\Downloads\\diamond_painting_map (7).png")
-imagen = cv2.resize(imagen, (width, height))
-cv2.imshow("Imagen", imagen)
-cv2.waitKey(0)
-cv2.destroyAllWindows() 
+# # Cargar una imagen y mostrarla en una ventana
+# width = 320
+# height = 240
+# imagen = cv2.imread("C:\\Users\\vagoa\\Downloads\\diamond_painting_map (7).png")
+# imagen2 = cv2.imread("C:\\Users\\vagoa\\Downloads\\color_legend (8).png")
+
+# # Redimensiona las imágenes antes de mostrarlas
+# imagen_resized = cv2.resize(imagen, (width, height))
+# imagen2_resized = cv2.resize(imagen2, (width*2, height*2))
+# imagen_revert = cv2.flip(imagen_resized, -1)
+
+# cv2.imshow("Imagen", imagen_revert)
+# cv2.moveWindow("Imagen", 100, 100)
+# cv2.imshow("Imagen 2", imagen2_resized)
+# cv2.moveWindow("Imagen 2", 800, 100)
+
+# cv2.waitKey(0)
+# cv2.destroyAllWindows() 
 
 #Reproducir un video y mostrarlo en una ventana
 cap = cv2.VideoCapture("C:\\Users\\vagoa\\Downloads\\video.mp4")
@@ -22,6 +32,7 @@ cv2.destroyAllWindows()
 
 cap = cv2.VideoCapture(0)  # 0 para la cámara predeterminada
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+glasses_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye_tree_eyeglasses.xml')
 
 while True:
     ret, frame = cap.read()
@@ -33,6 +44,16 @@ while True:
 
     for (x, y, w, h) in faces:
         cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
+                # Región de interés para buscar lentes solo dentro de la cara
+        roi_gray = gray[y:y+h, x:x+w]
+        roi_color = frame[y:y+h, x:x+w]
+        # Detecta lentes dentro de la cara
+        glasses = glasses_cascade.detectMultiScale(roi_gray, scaleFactor=1.1, minNeighbors=5)
+        for (ex, ey, ew, eh) in glasses:
+            # Dibuja un rectángulo verde alrededor de los lentes
+            cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2)
+
+
 
     cv2.imshow("Video", frame)
     if cv2.waitKey(1) & 0xFF == ord('s'):
