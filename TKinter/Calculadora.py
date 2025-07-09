@@ -7,13 +7,31 @@ BTN_TEXT_COLOR = "#eeeeee"   # Color del texto de los botones
 ENTRY_BG = "#8A0F6C"         # Color de fondo del campo de entrada
 ENTRY_FG = "#000000"         # Color del texto del campo de entrada
 
+import re
+
+def limpiar_ceros(expr):
+    # Reemplaza números con ceros innecesarios (como 0005) por su versión limpia (5)
+    def limpiar_numero(match):
+        num = match.group()
+        if "." in num:
+            parte_entera, parte_decimal = num.split(".")
+            parte_entera = parte_entera.lstrip("0") or "0"
+            return parte_entera + "." + parte_decimal
+        else:
+            return num.lstrip("0") or "0"
+
+    # Busca todos los números en la expresión (enteros o decimales)
+    return re.sub(r'\b0*\d+(\.\d+)?\b', limpiar_numero, expr)
+
 # Función que maneja los clics en los botones de la calculadora
 def click(event):
     current = entry.get()  # Obtiene el texto actual del campo de entrada
     text = event.widget.cget("text")  # Obtiene el texto del botón presionado
     if text == "=":
         try:
+            current = limpiar_ceros(current)  # Limpia los ceros innecesarios
             result = str(eval(current))  # Evalúa la expresión matemática ingresada
+            
             entry.delete(0, tk.END)      # Borra el campo de entrada
             entry.insert(0, result)      # Inserta el resultado en el campo de entrada
         except Exception:
@@ -21,6 +39,8 @@ def click(event):
             entry.insert(0, "Error")     # Muestra "Error" en el campo de entrada
     elif text == "C":
         entry.delete(0, tk.END)          # Borra todo el campo de entrada si se presiona "C"
+    elif text == "<-":
+        entry.delete(len(current) - 1, tk.END)  # Borra el último carácter del campo de entrada
     else:
         entry.insert(tk.END, text)       # Agrega el texto del botón al final del campo de entrada
 
@@ -44,7 +64,8 @@ buttons = [
     "7", "8", "9", "/",
     "4", "5", "6", "*",
     "1", "2", "3", "-",
-    "0", "C", "=", "+"
+    "0", "C", "=", "+",
+    ".", "<-"
 ]
 
 # Crea y coloca los botones en la ventana usando un grid
@@ -65,9 +86,8 @@ for i in range(4):
     main_frame.grid_columnconfigure(i, weight=1)
     root.grid_columnconfigure(0, weight=1)
 # Configura el tamaño de las filas para que se expandan al redimensionar la ventana
-for i in range(5):
+for i in range(56):
     main_frame.grid_rowconfigure(i, weight=1)
     root.grid_rowconfigure(0, weight=1)
-
 
 root.mainloop()  # Inicia el bucle principal de la interfaz gráfica
