@@ -5,10 +5,12 @@
 # “Este curso te ayudará a aprender Python fácilmente.”
 import os
 from docx import Document
-
+ruta_actual = os.path.dirname(os.path.abspath(__file__))  # Obtener la ruta actual del directorio de trabajo
+print(f"Ruta actual: {ruta_actual}")  # Imprimir la ruta actual para verificar
 # Crear carpeta "Mensajes" si no existe
-if not os.path.exists('Exposición Manejo de Archivos Mensajes'):
-    os.mkdir('Exposición Manejo de Archivos Mensajes')
+if not os.path.exists(os.path.join(ruta_actual, 'Exposición Manejo de Archivos Mensajes')):
+    print("Creando la carpeta 'Exposición Manejo de Archivos Mensajes'...")
+    os.mkdir(os.path.join(ruta_actual, 'Exposición Manejo de Archivos Mensajes'))
 else:
     print("La carpeta 'Exposición Manejo de Archivos Mensajes' ya existe.")
 
@@ -18,6 +20,4 @@ doc.add_heading("¡Bienvenido al curso!", level=1)
 doc.add_paragraph("Este curso te ayudará a aprender Python fácilmente.")
 
 # Guardar documento en la carpeta "Mensajes"
-doc.save("Mensajes/bienvenida.docx")
-
-print("Archivo 'bienvenida.docx' creado en la carpeta 'Mensajes'.")  # Mensaje de confirmación
+doc.save(os.path.join(ruta_actual, "Exposición Manejo de Archivos Mensajes/bienvenida.docx"))
