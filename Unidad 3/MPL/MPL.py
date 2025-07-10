@@ -14,6 +14,8 @@
 
 # El primer paso es importar el módulo pyplot con el alias plt
 import matplotlib.pyplot as plt  # Importa la librería principal para graficar
+import os  # Importa el módulo os para manejar rutas de archivos
+import numpy as np  # Importa la librería para trabajar con arreglos numéricos
 # Después creamos la figura y los ejes
 fig, ax = plt.subplots()  # Crea una figura (ventana) y un conjunto de ejes (ax) donde se dibujará la gráfica
 # En este caso se va a dibujar una serie de puntos
@@ -25,9 +27,9 @@ plt.show()  # Muestra la ventana con la gráfica generada
 
 # Como realizar las demás gráficas
 
-import matplotlib.pyplot as plt  # Se vuelve a importar, aunque ya está arriba (no es necesario repetir)
-import numpy as np  # Importa la librería para trabajar con arreglos numéricos
 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+# Obtiene el directorio del script actual para guardar las imágenes en la misma carpeta
 # Datos de ejemplo para las gráficas
 datos = np.random.randn(100)  # Genera 100 datos aleatorios con distribución normal
 categorias = ['A', 'B', 'C']  # Nombres de categorías para gráficas de barras y pastel
@@ -39,42 +41,48 @@ y = np.sin(x)  # Calcula el seno de cada valor de x
 plt.figure()  # Crea una nueva figura
 plt.hist(datos, bins=10)  # Dibuja un histograma de los datos con 10 barras
 plt.title("Histograma")  # Agrega título
-plt.savefig("histograma2.png")  # Guarda la imagen
+ruta_guardado = os.path.join(script_dir, "histograma2.png")
+plt.savefig(ruta_guardado)  # Guarda la imagen
 plt.show()  # Muestra la gráfica
 
 # Barras
 plt.figure()  # Nueva figura
 plt.bar(categorias, valores)  # Dibuja una gráfica de barras
 plt.title("Gráfica de barras")  # Título
-plt.savefig("barras.png")  # Guarda la imagen
+ruta_guardado = os.path.join(script_dir, "barras.png")
+plt.savefig(ruta_guardado)  # Guarda la imagen
 plt.show()  # Muestra la gráfica
 
 # Sectores (pastel)
 plt.figure()  # Nueva figura
 plt.pie(valores, labels=categorias)  # Dibuja un gráfico de pastel con etiquetas
 plt.title("Gráfica de sectores")  # Título
-plt.savefig("sectores.png")  # Guarda la imagen
+ruta_guardado = os.path.join(script_dir, "sectores.png")
+plt.savefig(ruta_guardado)  # Guarda la imagen
 plt.show()  # Muestra la gráfica
 
 # Caja y bigotes
 plt.figure()  # Nueva figura
 plt.boxplot([datos, np.random.randn(100)])  # Dibuja un diagrama de caja y bigotes para dos conjuntos de datos
 plt.title("Caja y bigotes")  # Título
-plt.savefig("caja_bigotes.png")  # Guarda la imagen
+ruta_guardado = os.path.join(script_dir, "caja_bigotes.png")
+plt.savefig(ruta_guardado)  # Guarda la imagen
 plt.show()  # Muestra la gráfica
 
 # Líneas
 plt.figure()  # Nueva figura
 plt.plot(x, y)  # Dibuja una gráfica de líneas (x contra y)
 plt.title("Gráfica de líneas")  # Título
-plt.savefig("lineas.png")  # Guarda la imagen
+ruta_guardado = os.path.join(script_dir, "lineas.png")
+plt.savefig(ruta_guardado)  # Guarda la imagen
 plt.show()  # Muestra la gráfica
 
 # Áreas
 plt.figure()  # Nueva figura
 plt.fill_between(x, y)  # Rellena el área bajo la curva y
 plt.title("Gráfica de áreas")  # Título
-plt.savefig("areas.png")  # Guarda la imagen
+ruta_guardado = os.path.join(script_dir, "areas.png")
+plt.savefig(ruta_guardado)  # Guarda la imagen
 plt.show()  # Muestra la gráfica
 
 # Mapa de color (matriz de calor)
@@ -83,7 +91,8 @@ plt.figure()  # Nueva figura
 plt.imshow(matriz, cmap='viridis')  # Muestra la matriz como imagen de colores
 plt.title("Mapa de color")  # Título
 plt.colorbar()  # Agrega barra de colores
-plt.savefig("mapa_color.png")  # Guarda la imagen
+ruta_guardado = os.path.join(script_dir, "mapa_color.png")
+plt.savefig(ruta_guardado)  # Guarda la imagen
 plt.show()  # Muestra la gráfica
 
 # Contorno
@@ -92,14 +101,16 @@ Z = np.sin(X**2 + Y**2)  # Calcula valores para cada punto de la malla
 plt.figure()  # Nueva figura
 plt.contour(X, Y, Z)  # Dibuja líneas de contorno para los valores de Z
 plt.title("Gráfica de contorno")  # Título
-plt.savefig("contorno.png")  # Guarda la imagen
+ruta_guardado = os.path.join(script_dir, "contorno.png")
+plt.savefig(ruta_guardado)  # Guarda la imagen
 plt.show()  # Muestra la gráfica
 
 # Violines
 plt.figure()  # Nueva figura
 plt.violinplot([datos, np.random.randn(100)])  # Dibuja un diagrama de violín para dos conjuntos de datos
 plt.title("Gráfica de violines")  # Título
-plt.savefig("violines.png")  # Guarda la imagen
+ruta_guardado = os.path.join(script_dir, "violines.png")
+plt.savefig(ruta_guardado)  # Guarda la imagen
 plt.show()  # Muestra la gráfica
 
 
